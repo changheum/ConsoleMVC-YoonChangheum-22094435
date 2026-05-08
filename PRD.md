@@ -158,13 +158,13 @@ b) 주문 거절
 ## Phase 3: Controller 스켈레톤 TDD
 > 역할: 사용자 입력 처리 + Model 조회/변경 + View 호출 조율. 레이어 간 접착제.
 
-- [ ] `app/controllers/sample_controller.py` — 시료 메뉴 라우팅
-- [ ] `app/controllers/order_controller.py` — 주문 메뉴 라우팅
-- [ ] `app/controllers/monitoring_controller.py` — 모니터링 메뉴 라우팅
-- [ ] `app/controllers/production_controller.py` — 생산 라인 메뉴 라우팅
-- [ ] `app/controllers/release_controller.py` — 출고 메뉴 라우팅
-- [ ] `tests/test_controllers/` — 컨트롤러가 올바른 뷰/모델을 호출하는지 단위 테스트
-- **완료 기준**: `pytest tests/test_controllers/ -v` 전체 통과
+- [x] `app/controllers/sample_controller.py` — 시료 메뉴 라우팅
+- [x] `app/controllers/order_controller.py` — 주문 메뉴 라우팅
+- [x] `app/controllers/monitoring_controller.py` — 모니터링 메뉴 라우팅
+- [x] `app/controllers/production_controller.py` — 생산 라인 메뉴 라우팅
+- [x] `app/controllers/release_controller.py` — 출고 메뉴 라우팅
+- [x] `tests/test_controllers/` — 컨트롤러가 올바른 뷰/모델을 호출하는지 단위 테스트 (74개 통과)
+- **완료 기준**: `pytest tests/test_controllers/ -v` 전체 통과 ✅
 - **담당 Agent**: `tdd-ocp-implementer`, `code-quality-validator`
 
 ## Phase 4: 통합 완성
@@ -182,6 +182,6 @@ b) 주문 거절
 | Phase 0 | ✅ 완료 | `phase0-setup` |
 | Phase 1 | ✅ 완료 | `phase1-models` |
 | Phase 2 | ✅ 완료 | `phase2-views` |
-| Phase 3 | ⏳ 대기 | `phase3-controllers` |
+| Phase 3 | ✅ 완료 | `phase3-controllers` |
 | Phase 4 | ⏳ 대기 | `phase4-integration` |
 
