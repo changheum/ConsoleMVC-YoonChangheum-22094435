@@ -144,15 +144,15 @@ b) 주문 거절
 ## Phase 2: View 스켈레톤 TDD
 > 역할: 콘솔 출력 전담. 데이터를 받아 문자열로 렌더링. 입력/로직 없음.
 
-- [ ] `app/views/base_view.py` — 공통 출력 메서드 (구분선, 헤더 등)
-- [ ] `app/views/main_menu_view.py` — 메인 메뉴 출력
-- [ ] `app/views/sample_view.py` — 시료 목록/상세 출력
-- [ ] `app/views/order_view.py` — 주문 목록 출력
-- [ ] `app/views/monitoring_view.py` — 상태별 요약 출력
-- [ ] `app/views/production_view.py` — 생산 큐 현황 출력
-- [ ] `app/views/release_view.py` — 출고 대상 목록 출력
-- [ ] `tests/test_views/` — 각 뷰의 출력 문자열 단위 테스트
-- **완료 기준**: `pytest tests/test_views/ -v` 전체 통과
+- [x] `app/views/base_view.py` — 공통 출력 메서드 (구분선, 헤더 등)
+- [x] `app/views/main_menu_view.py` — 메인 메뉴 출력
+- [x] `app/views/sample_view.py` — 시료 목록/상세 출력
+- [x] `app/views/order_view.py` — 주문 목록 출력
+- [x] `app/views/monitoring_view.py` — 상태별 요약 출력
+- [x] `app/views/production_view.py` — 생산 큐 현황 출력
+- [x] `app/views/release_view.py` — 출고 대상 목록 출력
+- [x] `tests/test_views/` — 각 뷰의 출력 문자열 단위 테스트 (71개 통과)
+- **완료 기준**: `pytest tests/test_views/ -v` 전체 통과 ✅
 - **담당 Agent**: `tdd-ocp-implementer`
 
 ## Phase 3: Controller 스켈레톤 TDD
@@ -181,7 +181,7 @@ b) 주문 거절
 |-------|------|---------|
 | Phase 0 | ✅ 완료 | `phase0-setup` |
 | Phase 1 | ✅ 완료 | `phase1-models` |
-| Phase 2 | ⏳ 대기 | `phase2-views` |
+| Phase 2 | ✅ 완료 | `phase2-views` |
 | Phase 3 | ⏳ 대기 | `phase3-controllers` |
 | Phase 4 | ⏳ 대기 | `phase4-integration` |
 
