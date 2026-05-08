@@ -115,63 +115,73 @@ b) 주문 거절
 
 ---
 
-# 개발 계획 (ConsoleMVC PoC — TDD 기반 단계별 구현)
+# 개발 계획 (ConsoleMVC PoC)
 
+> **PoC 범위**: MVC 스켈레톤 코드 — Model / Controller / View 패키지 구조와 역할 분리 완성
+> 비즈니스 로직 상세 구현은 `SampleOrderSystem` 통합 단계에서 진행한다.
+>
 > 각 Phase는 TDD(Red→Green→Refactor) 사이클로 구현하며, 완료 후 승인을 받아 Git push 한다.
-> 사용 Agent: `tdd-ocp-implementer` (구현), `code-quality-validator` (품질), `prd-compliance-reviewer` (검증)
+> 사용 Agent: `tdd-ocp-implementer` (구현), `code-quality-validator` (품질)
 
 ## Phase 0: 프로젝트 설정 ✅
-- [x] CLAUDE.md 작성 (아키텍처, 명령어, 도메인 모델 문서화)
+- [x] CLAUDE.md 작성 (아키텍처, 명령어, 도메인 문서화)
 - [x] PRD.md 개발 계획 섹션 추가
-- [ ] 디렉터리 스캐폴딩 (`app/`, `tests/`, `requirements.txt`, `conftest.py`)
-- **완료 기준**: pytest 실행 가능한 빈 프로젝트 구조
-- **담당 Agent**: 없음 (수동 설정)
+- [x] 디렉터리 스캐폴딩 (`app/`, `tests/`, `requirements.txt`, `conftest.py`)
+- [x] `.gitignore` 추가
+- **완료 기준**: pytest 실행 가능한 빈 프로젝트 구조 ✅
 
-## Phase 1: 도메인 모델 TDD
-- [ ] `app/models/sample.py` — Sample 엔티티 (id, name, avg_production_time, yield_rate)
-- [ ] `app/models/order.py` — Order 엔티티 + OrderStatus 상태 머신
-- [ ] `app/models/inventory.py` — 재고 관리 + 상태 임계값 (여유/부족/고갈)
-- [ ] `app/models/production_queue.py` — FIFO 생산 큐
-- [ ] `tests/test_models/` — 각 모델 단위 테스트
+## Phase 1: Model 스켈레톤 TDD
+> 역할: 도메인 데이터 구조 정의. 비즈니스 로직 없이 속성과 상태 표현에 집중.
+
+- [x] `app/models/sample.py` — Sample 데이터 클래스 (sample_id, name, avg_production_time, yield_rate)
+- [x] `app/models/order.py` — OrderStatus enum + Order 데이터 클래스
+- [x] `app/models/inventory.py` — Inventory 데이터 클래스 (sample_id, quantity)
+- [x] `app/models/production_queue.py` — ProductionJob 데이터 클래스 + ProductionQueue (FIFO 컨테이너)
+- [x] `tests/test_models/` — 각 모델 생성/속성 접근 단위 테스트 (48개 통과)
 - **완료 기준**: `pytest tests/test_models/ -v` 전체 통과
 - **담당 Agent**: `tdd-ocp-implementer`
 
-## Phase 2: 컨트롤러 TDD
-- [ ] `app/controllers/sample_controller.py` — 시료 등록/조회/검색
-- [ ] `app/controllers/order_controller.py` — 접수/승인/거절 + 재고 연동 + 생산 큐 등록
-- [ ] `app/controllers/production_controller.py` — 생산 처리 및 CONFIRMED 전환
-- [ ] `app/controllers/monitoring_controller.py` — 상태별 집계 (REJECTED 제외)
-- [ ] `app/controllers/release_controller.py` — 출고 처리 (CONFIRMED→RELEASE)
-- [ ] `tests/test_controllers/` — 각 컨트롤러 단위 테스트 (의존성 Mock 처리)
-- **완료 기준**: `pytest tests/test_controllers/ -v` 전체 통과
-- **담당 Agent**: `tdd-ocp-implementer`, `code-quality-validator`
+## Phase 2: View 스켈레톤 TDD
+> 역할: 콘솔 출력 전담. 데이터를 받아 문자열로 렌더링. 입력/로직 없음.
 
-## Phase 3: 뷰 스켈레톤
-- [ ] `app/views/base_view.py` — 공통 콘솔 출력 유틸
-- [ ] `app/views/main_menu_view.py` — 메인 메뉴 및 요약 화면
-- [ ] `app/views/sample_view.py` — 시료 관리 화면
-- [ ] `app/views/order_view.py` — 주문 접수/승인/거절 화면
-- [ ] `app/views/monitoring_view.py` — 모니터링 화면
-- [ ] `app/views/production_view.py` — 생산 라인 화면
-- [ ] `app/views/release_view.py` — 출고 처리 화면
-- [ ] `tests/test_views/` — 뷰 출력 문자열 단위 테스트
+- [ ] `app/views/base_view.py` — 공통 출력 메서드 (구분선, 헤더 등)
+- [ ] `app/views/main_menu_view.py` — 메인 메뉴 출력
+- [ ] `app/views/sample_view.py` — 시료 목록/상세 출력
+- [ ] `app/views/order_view.py` — 주문 목록 출력
+- [ ] `app/views/monitoring_view.py` — 상태별 요약 출력
+- [ ] `app/views/production_view.py` — 생산 큐 현황 출력
+- [ ] `app/views/release_view.py` — 출고 대상 목록 출력
+- [ ] `tests/test_views/` — 각 뷰의 출력 문자열 단위 테스트
 - **완료 기준**: `pytest tests/test_views/ -v` 전체 통과
 - **담당 Agent**: `tdd-ocp-implementer`
 
-## Phase 4: 통합 및 PRD 정합성 검증
-- [ ] `app/main.py` — 메인 메뉴 루프 및 컨트롤러/뷰 연결
-- [ ] PRD 요구사항 대비 구현 완성도 검증
-- [ ] 코드 품질 최종 점검
+## Phase 3: Controller 스켈레톤 TDD
+> 역할: 사용자 입력 처리 + Model 조회/변경 + View 호출 조율. 레이어 간 접착제.
+
+- [ ] `app/controllers/sample_controller.py` — 시료 메뉴 라우팅
+- [ ] `app/controllers/order_controller.py` — 주문 메뉴 라우팅
+- [ ] `app/controllers/monitoring_controller.py` — 모니터링 메뉴 라우팅
+- [ ] `app/controllers/production_controller.py` — 생산 라인 메뉴 라우팅
+- [ ] `app/controllers/release_controller.py` — 출고 메뉴 라우팅
+- [ ] `tests/test_controllers/` — 컨트롤러가 올바른 뷰/모델을 호출하는지 단위 테스트
+- **완료 기준**: `pytest tests/test_controllers/ -v` 전체 통과
+- **담당 Agent**: `tdd-ocp-implementer`, `code-quality-validator`
+
+## Phase 4: 통합 완성
+> 역할: main.py로 전체 루프 연결. MVC 역할 분리 최종 검증.
+
+- [ ] `app/main.py` — 메인 메뉴 루프 (Controller 들을 연결)
 - [ ] `pytest -v` 전체 통과 확인
-- **완료 기준**: 모든 테스트 통과 + PRD compliance 리포트 이상 없음
-- **담당 Agent**: `prd-compliance-reviewer`, `code-quality-validator`
+- [ ] 코드 품질 최종 점검
+- **완료 기준**: 모든 테스트 통과 + MVC 레이어 역할 분리 명확
+- **담당 Agent**: `code-quality-validator`
 
 ## 진행 상태
 | Phase | 상태 | Git Tag |
 |-------|------|---------|
 | Phase 0 | ✅ 완료 | `phase0-setup` |
-| Phase 1 | ⏳ 대기 | `phase1-models` |
-| Phase 2 | ⏳ 대기 | `phase2-controllers` |
-| Phase 3 | ⏳ 대기 | `phase3-views` |
+| Phase 1 | ✅ 완료 | `phase1-models` |
+| Phase 2 | ⏳ 대기 | `phase2-views` |
+| Phase 3 | ⏳ 대기 | `phase3-controllers` |
 | Phase 4 | ⏳ 대기 | `phase4-integration` |
 
