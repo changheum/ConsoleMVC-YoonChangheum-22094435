@@ -36,5 +36,5 @@ class SampleController:
             choice = input("선택: ").strip()
             if choice == "0":
                 break
-            elif choice == "1":
+            elif choice == "2":
                 self.list_samples()

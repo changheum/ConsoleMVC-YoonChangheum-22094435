@@ -49,3 +49,7 @@ class ProductionQueue:
     def size(self) -> int:
         """Return the number of jobs currently in the queue."""
         return len(self._queue)
+
+    def snapshot(self) -> list:
+        """Return a shallow copy of all jobs in FIFO order without mutating the queue."""
+        return list(self._queue)

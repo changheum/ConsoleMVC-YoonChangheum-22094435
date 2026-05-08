@@ -26,5 +26,5 @@ def show_production_queue(queue_items: List[ProductionJob]) -> None:
         return
     print(f"{'주문ID':<10} {'시료ID':<10} {'요구수량':>8}")
     print_separator()
-    for idx, job in enumerate(queue_items, start=1):
+    for job in queue_items:
         print(f"{job.order_id:<10} {job.sample_id:<10} {job.required_quantity:>8}")

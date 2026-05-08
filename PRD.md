@@ -170,10 +170,13 @@ b) 주문 거절
 ## Phase 4: 통합 완성
 > 역할: main.py로 전체 루프 연결. MVC 역할 분리 최종 검증.
 
-- [ ] `app/main.py` — 메인 메뉴 루프 (Controller 들을 연결)
-- [ ] `pytest -v` 전체 통과 확인
-- [ ] 코드 품질 최종 점검
-- **완료 기준**: 모든 테스트 통과 + MVC 레이어 역할 분리 명확
+- [x] `app/main.py` — 메인 메뉴 루프 (Controller 들을 연결)
+- [x] `pytest -v` 전체 통과 확인 (193개)
+- [x] 코드 품질 최종 점검 (`code-quality-validator` 종합 8/10)
+  - `ProductionQueue.snapshot()` 공개 메서드 추가 (캡슐화 위반 수정)
+  - `production_view.py` 미사용 변수 제거
+  - `sample_controller.py` 메뉴 분기 불일치 수정
+- **완료 기준**: 모든 테스트 통과 + MVC 레이어 역할 분리 명확 ✅
 - **담당 Agent**: `code-quality-validator`
 
 ## 진행 상태
@@ -183,5 +186,5 @@ b) 주문 거절
 | Phase 1 | ✅ 완료 | `phase1-models` |
 | Phase 2 | ✅ 완료 | `phase2-views` |
 | Phase 3 | ✅ 완료 | `phase3-controllers` |
-| Phase 4 | ⏳ 대기 | `phase4-integration` |
+| Phase 4 | ✅ 완료 | `phase4-integration` |
 

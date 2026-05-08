@@ -21,8 +21,7 @@ class ProductionController:
 
     def show_queue(self) -> None:
         """Extract all jobs from the queue (without dequeuing) and delegate to the view."""
-        # Access the internal deque as a list so the queue remains intact.
-        items = list(self.production_queue._queue)
+        items = self.production_queue.snapshot()
         self.view.show_production_queue(items)
 
     def run(self) -> None:
